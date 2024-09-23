@@ -10,6 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigation,
 } from "@remix-run/react";
 import appStylesHref from "./app.css?url";
 
@@ -31,6 +32,7 @@ export const links: LinksFunction = () => [
 
 export default function App() {
   const { contacts } = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
   return (
     <html lang="en">
       <head>
@@ -93,7 +95,10 @@ export default function App() {
         </div>
 
 
-        <div id="detail">
+        <div
+          id="detail"
+          className={navigation.state === "loading" ? "loading" : ""}
+        >
           <Outlet />
         </div>
 
